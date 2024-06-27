@@ -220,7 +220,7 @@ class _page21State extends State<page21> {
                         onPressed: (){
                           if(_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            db.collection('Medicines').add({
+                            db.collection('Medicines search page').add({
                               'Name': _productName,
                               'Price': _productPrice,
                               'Description': _productDescription,

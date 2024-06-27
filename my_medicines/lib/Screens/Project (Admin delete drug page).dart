@@ -119,11 +119,11 @@ class _page29State extends State<page29> {
     searchResultList();
   }
 
-  late Future<List<medicine>> medicineFuture = fireStore.getMedicines('Medicines');
+  late Future<List<medicine>> medicineFuture = fireStore.getMedicines('Medicines search page');
 
   void Refresh(){
     setState(() {
-      medicineFuture = fireStore.getMedicines('Medicines');
+      medicineFuture = fireStore.getMedicines('Medicines search page');
     });
   }
 
@@ -271,7 +271,7 @@ class _page29State extends State<page29> {
                                             Center(
                                               child: IconButton(
                                                 onPressed: (){
-                                                  db.collection('Medicines').doc(medicine.docId).delete().then(
+                                                  db.collection('Medicines search page').doc(medicine.docId).delete().then(
                                                     (doc) => {print("Document deleted") , Refresh()},
                                                     onError: (e) => print("Error updating document $e"),
                                                   );
