@@ -15,9 +15,13 @@ class page21 extends StatefulWidget {
 class _page21State extends State<page21> {
 
   final  _formKey = GlobalKey<FormState>();
+  
   String _productName = '';
-  double _productPrice = 0.0;
   String _productDescription = '';
+  String _productWarnings = '';
+  String _productHowShouldITakeIt = '';
+  String _productSideEffects = '';
+  double _productPrice = 0.0;
   List _productImage = [];
   // File? galaryFile;
   // final picker = ImagePicker();
@@ -149,17 +153,83 @@ class _page21State extends State<page21> {
                       child: TextFormField(
                         validator: (value) {
                           if( value!.isEmpty ) {
-                            return "Please enter drug notes";
+                            return "Please enter drug description";
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          labelText: 'Drug Notes',
+                          labelText: 'Drug Description',
                           border: OutlineInputBorder(),
                         ),
                         maxLines: 5,
                         onSaved: (newValue) {
                           _productDescription = newValue!;
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    Container(
+                      width: 220,
+                      child: TextFormField(
+                        validator: (value) {
+                          if( value!.isEmpty ) {
+                            return "Please enter drug warnings";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Drug Warnings',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: 5,
+                        onSaved: (newValue) {
+                          _productWarnings = newValue!;
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    Container(
+                      width: 220,
+                      child: TextFormField(
+                        validator: (value) {
+                          if( value!.isEmpty ) {
+                            return "Please enter drug how should i take it";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Drug how should i take it',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: 5,
+                        onSaved: (newValue) {
+                          _productHowShouldITakeIt = newValue!;
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+
+                    Container(
+                      width: 220,
+                      child: TextFormField(
+                        validator: (value) {
+                          if( value!.isEmpty ) {
+                            return "Please enter drug side effects";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Drug side effects',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: 5,
+                        onSaved: (newValue) {
+                          _productSideEffects = newValue!;
                         },
                       ),
                     ),
@@ -224,6 +294,9 @@ class _page21State extends State<page21> {
                               'Name': _productName,
                               'Price': _productPrice,
                               'Description': _productDescription,
+                              'Warnings': _productWarnings,
+                              'How should I take it': _productHowShouldITakeIt,
+                              'Side effects': _productSideEffects,
                               'Image': _productImage,
                             }).then((value) => print('Added Data With ID: ${value.id}'));
                             showDialog(
