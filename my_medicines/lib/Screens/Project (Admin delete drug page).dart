@@ -112,7 +112,7 @@ class _page29State extends State<page29> {
   final TextEditingController _searchController = TextEditingController();
 
   getClientStream() async {
-    var data = await fireStore.getMedicines('Medicines');
+    var data = await fireStore.getMedicines('Medicines search page');
     setState(() {
       _allResults = data;
     });
