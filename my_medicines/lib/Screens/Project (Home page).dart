@@ -392,85 +392,98 @@ class _page9State extends State<page9> {
                     child: Text('Some Pharmacies' , style: TextStyle(fontSize: 22 , fontWeight: FontWeight.bold),),
                   ),
           
-                  Container(
-                    margin: EdgeInsets.only(top: 10 , left: 30),
-                    width: 330,
-                    height: 210,
-                    child: PageView.builder(
-                      itemCount: images.length,
-                      itemBuilder: (context , _selectedIndex) {
-                        return Stack(
-                          children: [
-                            Column(
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double localWidth = constraints.maxWidth;
+
+                      return Container(
+                        margin: EdgeInsets.only(top: 10 , left: 30),
+                        width: localWidth / 1.1,
+                        height: 210,
+                        child: PageView.builder(
+                          itemCount: images.length,
+                          itemBuilder: (context , _selectedIndex) {
+                            return Stack(
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(18),
-                                  child: Container(
-                                    color: Color.fromARGB(255, 235, 232, 232),
-                                    child: Container(
-                                      width: 300,
-                                      child: Image.asset(
-                                        images[_selectedIndex] , fit: BoxFit.cover , 
-                                        height: 180,
-                                        width: 360,
+                                Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(18),
+                                      child: Container(
+                                        color: Color.fromARGB(255, 235, 232, 232),
+                                        child: Container(
+                                          width: localWidth / 1.2,
+                                          child: Image.asset(
+                                            images[_selectedIndex] , fit: BoxFit.cover , 
+                                            height: 180,
+                                            width: 360,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    
+                                  ],
                                 ),
-                                
-                              ],
-                            ),
+                      
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: localWidth / 5,
+                                      margin: EdgeInsets.only(top: 190),
+                                      child: Row(
+                                        children: [
+                                            
+                                          CircleAvatar(
+                                            radius: 6,
+                                            backgroundColor: Colors.black,
+                                            child: CircleAvatar(
+                                              radius: 5,                          
+                                              backgroundColor: 0 == _selectedIndex
+                                              ? Colors.red
+                                              : Color.fromARGB(255, 77, 76, 76)
+                                            ),
+                                          ),
+                                            
+                                          SizedBox(width: 8),
+                                            
+                                          CircleAvatar(
+                                            radius: 6,
+                                            backgroundColor: Colors.black,
+                                            child: CircleAvatar(
+                                              radius: 5,
+                                              backgroundColor: 1 == _selectedIndex
+                                              ? Colors.red
+                                              : Color.fromARGB(255, 77, 76, 76)
+                                            ),
+                                          ),
+                                            
+                                          SizedBox(width: 8),
+                                            
+                                          CircleAvatar(
+                                            radius: 6,
+                                            backgroundColor: Colors.black,
+                                            child: CircleAvatar(
+                                              radius: 5,
+                                              backgroundColor: 2 == _selectedIndex
+                                              ? Colors.red
+                                              : Color.fromARGB(255, 77, 76, 76)
+                                            ),
+                                          ),
+                                            
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                      
+                              ]
+                            );
+                          }
+                        )
+                      );
 
-                            Container(
-                              margin: EdgeInsets.only(top: 190, left: 125),
-                              child: Row(
-                                children: [
-                                    
-                                  CircleAvatar(
-                                    radius: 6,
-                                    backgroundColor: Colors.black,
-                                    child: CircleAvatar(
-                                      radius: 5,                          
-                                      backgroundColor: 0 == _selectedIndex
-                                      ? Colors.red
-                                      : Color.fromARGB(255, 77, 76, 76)
-                                    ),
-                                  ),
-                                    
-                                  SizedBox(width: 8),
-                                    
-                                  CircleAvatar(
-                                    radius: 6,
-                                    backgroundColor: Colors.black,
-                                    child: CircleAvatar(
-                                      radius: 5,
-                                      backgroundColor: 1 == _selectedIndex
-                                      ? Colors.red
-                                      : Color.fromARGB(255, 77, 76, 76)
-                                    ),
-                                  ),
-                                    
-                                  SizedBox(width: 8),
-                                    
-                                  CircleAvatar(
-                                    radius: 6,
-                                    backgroundColor: Colors.black,
-                                    child: CircleAvatar(
-                                      radius: 5,
-                                      backgroundColor: 2 == _selectedIndex
-                                      ? Colors.red
-                                      : Color.fromARGB(255, 77, 76, 76)
-                                    ),
-                                  ),
-                                    
-                                ],
-                              ),
-                            ),
-
-                          ]
-                        );
-                      }
-                    )
+                    }
                   ),
 
                   SizedBox(height: 30),
@@ -479,105 +492,114 @@ class _page9State extends State<page9> {
                     child: Text('Some Antibiotics' , style: TextStyle(fontSize: 22 , fontWeight: FontWeight.bold),),
                   ),
 
-                  Container(
-                    margin: EdgeInsets.only(left: 25 , right: 25),
-                    width: 400,
-                    height: 210,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
+                  SizedBox(height: 10,),
 
-                        IconButton(
-                          onPressed: (){
+                  Container(
+                    height: 210,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        double localWidth = constraints.maxWidth;
+                        double localHeight = constraints.maxHeight;
+                    
+                        return Center(
+                          child: Container(
+                            width: localWidth / 1.18,
+                            height: localHeight / 1.1,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
                           
-                          },
-                          icon: Container(
-                            width: 300,
-                            child: FutureBuilder(
-                              future: medicineFuture, 
-                              builder: (context , snapshot){
-                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                  return Center(child: CircularProgressIndicator());
-                                }
-                                else if(snapshot.hasError) {
-                                  return Center(child: Text('Error: ${snapshot.error}'));
-                                }
-                                else if(!snapshot.hasData || snapshot.data!.isEmpty) {
-                                  return Center(child: Text('No medicines found'));
-                                }
-                                else {
-                                  final medicines = snapshot.data!;
-                                  return GridView.builder(
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 1.7 / 2,
-                                      crossAxisSpacing: 10,
-                                      mainAxisSpacing: 10,
-                                    ), 
-                                    itemCount: medicines.length,
-                                    itemBuilder: (context , index) {
-                                      final medicine = medicines[index];
-                                      return Card(
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context, MaterialPageRoute(
-                                                builder: (context)=> page14(
-                                                  Name: medicine.Name, Description: medicine.Description,Warnings: medicine.Warnings, howShouldITakeIt: medicine.howShouldITakeIt, sideEffects: medicine.sideEffects, Price: medicine.Price, Image: medicine.Image,
-                                                )
-                                              )
-                                            );
-                                          },
-                                          child: Column(
-                                            children: [
-                                              Expanded(
-                                                child: Image.network(
-                                                  medicine.Image.isNotEmpty
-                                                    ? medicine.Image[0]
-                                                    : '',
-                                                  fit: BoxFit.cover,
-                                                  width: double.infinity,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.all(8),
+                                Container(
+                                  width: localWidth / 1.2,
+                                  child: FutureBuilder(
+                                    future: medicineFuture, 
+                                    builder: (context , snapshot){
+                                      if (snapshot.connectionState == ConnectionState.waiting) {
+                                        return Center(child: CircularProgressIndicator());
+                                      }
+                                      else if(snapshot.hasError) {
+                                        return Center(child: Text('Error: ${snapshot.error}'));
+                                      }
+                                      else if(!snapshot.hasData || snapshot.data!.isEmpty) {
+                                        return Center(child: Text('No medicines found'));
+                                      }
+                                      else {
+                                        final medicines = snapshot.data!;
+                                        return GridView.builder(
+                                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 1.7 / 2,
+                                            crossAxisSpacing: 10,
+                                            mainAxisSpacing: 10,
+                                          ), 
+                                          itemCount: medicines.length,
+                                          itemBuilder: (context , index) {
+                                            final medicine = medicines[index];
+                                            return Card(
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context, MaterialPageRoute(
+                                                      builder: (context)=> page14(
+                                                        Name: medicine.Name, Description: medicine.Description,Warnings: medicine.Warnings, howShouldITakeIt: medicine.howShouldITakeIt, sideEffects: medicine.sideEffects, Price: medicine.Price, Image: medicine.Image,
+                                                      )
+                                                    )
+                                                  );
+                                                },
                                                 child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
-                                                    Center(
-                                                      child: Text(
-                                                        medicine.Name,
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
+                                                    Expanded(
+                                                      child: Image.network(
+                                                        medicine.Image.isNotEmpty
+                                                          ? medicine.Image[0]
+                                                          : '',
+                                                        fit: BoxFit.cover,
+                                                        width: double.infinity,
                                                       ),
                                                     ),
-                                                    Center(
-                                                      child: Text(
-                                                        '\$${medicine.Price}',
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.grey[600]
-                                                        ),
+                                                    Padding(
+                                                      padding: EdgeInsets.all(8),
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Center(
+                                                            child: Text(
+                                                              medicine.Name,
+                                                              style: TextStyle(
+                                                                fontSize: 16,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Center(
+                                                            child: Text(
+                                                              '\$${medicine.Price}',
+                                                              style: TextStyle(
+                                                                fontSize: 14,
+                                                                color: Colors.grey[600]
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                  ],
+                                                  ]
                                                 ),
                                               ),
-                                            ]
-                                          ),
-                                        ),
-                                      );
+                                            );
+                                          }
+                                        );
+                                      }
                                     }
-                                  );
-                                }
-                              }
+                                  ),
+                                ),
+                                
+                                      
+                              ],
                             ),
                           ),
-                        ),
-                              
-                      ],
+                        );
+                      }
                     ),
                   ),
 
@@ -587,307 +609,354 @@ class _page9State extends State<page9> {
                     child: Text('Healthcare' , style: TextStyle(fontSize: 22 , fontWeight: FontWeight.bold),),
                   ),
 
-                  Container(
-                    margin: EdgeInsets.only(left: 40),
-                    child: Row(
-                      children: [
+                  Center(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        double localWidth = constraints.maxWidth;
 
-                        Container(
-                          width: 320,
+                        return Container(
+                          width: localWidth / 1.1,
+                          child: Row(
+                            children: [
+                        
+                              Container(
+                                width: 325,
+                                child: ExpansionTile(
+                                  title: Text('Eye Care' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                  trailing: Icon(
+                                    _customTileExpanded1
+                                    ? Icons.keyboard_arrow_down
+                                    : Icons.keyboard_arrow_right,
+                                  ),
+                                  children: [
+                                    Column(
+                                      children: [
+                                        ListTile(
+                        
+                                          title: ExpansionTile(
+                                            title: Text('Eye Mask'),
+                                            trailing: Icon(
+                                              _customTileExpanded2
+                                              ? Icons.keyboard_arrow_down
+                                              : Icons.keyboard_arrow_right,
+                                            ),
+                                            children: [
+                        
+                                              LayoutBuilder(
+                                                builder: (context, constraints) {
+                                                  double localWidth = constraints.maxWidth;
+
+                                                  return Center(
+                                                    child: Container(
+                                                      width: localWidth / 1.1,
+                                                      child: ListTile(
+                                                        title: Container(
+                                                          height: 250,
+                                                          child: ListView(
+                                                            scrollDirection: Axis.horizontal,
+                                                            children: [
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Flents.avif' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Container(
+                                                                      width: 100,
+                                                                      child: Text('Flents, Reusable Sleep Mask, One Size Fits Most, 1 Mask' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
+                                                                    Text('JOD 3.813' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Earth Therapeutics.avif' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('Earth Therapeutics, Green Tea Hydrogel Under-Eye Patch, 5 Pairs' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    Text('JOD 6.763' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Flents 1.avif' , width: 120,),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('Flents, Eye Mask, Hot and Cold Water Therapy, 1 Mask' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    SizedBox(height: 18),
+                                                                    Text('JOD 10.540' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                                    
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                              )
+                        
+                                            ],
+                                            onExpansionChanged: (bool expanded) {
+                                              setState(() {
+                                                _customTileExpanded2 = expanded;
+                                              });
+                                            },
+                                          ),
+                        
+                                        ),
+                        
+                                        ListTile(
+                                          title: ExpansionTile(
+                                            title: Text('Eye Accessories'),
+                                            trailing: Icon(
+                                              _customTileExpanded3
+                                              ? Icons.keyboard_arrow_down
+                                              : Icons.keyboard_arrow_right,
+                                            ),
+                                            children: [
+                        
+                                              LayoutBuilder(
+                                                builder: (context, constraints) {
+                                                  double localWidth = constraints.maxWidth;
+                                                  return Center(
+                                                    child: Container(
+                                                      width: localWidth / 1.1,
+                                                      child: ListTile(
+                                                        title: Container(
+                                                          height: 250,
+                                                          child: ListView(
+                                                            scrollDirection: Axis.horizontal,
+                                                            children: [
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Gel Beads.jpeg' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Container(
+                                                                      width: 100,
+                                                                      child: Text('Spa Solutions – Gel Beads Eye Mask Hot & Cold' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
+                                                                    Text('JOD 3.75' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/ComplEye.jpeg' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('ComplEye' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    SizedBox(height: 36,),
+                                                                    Text('JOD 5.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Magic Touch.jpg' , width: 120,),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('Magic Touch eye drop applicator' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    SizedBox(height: 18),
+                                                                    Text('JOD 14.94' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                                    
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                              ),
+                        
+                                            ],
+                                            onExpansionChanged: (bool expanded) {
+                                              setState(() {
+                                                _customTileExpanded3 = expanded;
+                                              });
+                                            },
+                                          ),
+                                        ), 
+                                      ],
+                                    ),
+                                  ],
+                                  onExpansionChanged: (bool expanded) {
+                                    setState(() {
+                                      _customTileExpanded1 = expanded;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    ),
+                  ),
+
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double localWidth = constraints.maxWidth;
+
+                      return Center(
+                        child: Container(
+                          width: localWidth / 1.1,
                           child: ExpansionTile(
-                            title: Text('Eye Care' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                            title: Text('Cough & Cold Remedies' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
                             trailing: Icon(
-                              _customTileExpanded1
+                              _customTileExpanded4
                               ? Icons.keyboard_arrow_down
-                              : Icons.keyboard_arrow_right,
+                              : Icons.keyboard_arrow_right
                             ),
                             children: [
-                              Column(
-                                children: [
-                                  ListTile(
+                        
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  double localWidth = constraints.maxWidth;
 
-                                    title: ExpansionTile(
-                                      title: Text('Eye Mask'),
-                                      trailing: Icon(
-                                        _customTileExpanded2
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                      ),
-                                      children: [
-
-                                        ListTile(
-                                          title: Container(
-                                            height: 250,
-                                            child: ListView(
-                                              scrollDirection: Axis.horizontal,
-                                              children: [
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Flents.avif' , height: 120),
-                                                        ),
+                                  return Center(
+                                    child: Container(
+                                      width: localWidth / 1.25,
+                                      child: ListTile(
+                                        title: Container(
+                                          height: 250,
+                                          child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            children: [
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Otrivin.webp' , height: 120),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Container(
-                                                        width: 100,
-                                                        child: Text('Flents, Reusable Sleep Mask, One Size Fits Most, 1 Mask' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
-                                                      Text('JOD 3.813' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Container(
+                                                      width: 100,
+                                                      child: Text('Otrivin Oxy Fast Relief Adult Nasal Spray 10ml' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
+                                                    Text('JOD 3.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Earth Therapeutics.avif' , height: 120),
-                                                        ),
+                                              ),
+                                        
+                                              SizedBox(width: 15),
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Strepsils.webp' , height: 120),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Text('Earth Therapeutics, Green Tea Hydrogel Under-Eye Patch, 5 Pairs' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      Text('JOD 6.763' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text('Strepsils Honey & Lemon Lozenge' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                    SizedBox(height: 36,),
+                                                    Text('JOD 4.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Flents 1.avif' , width: 120,),
-                                                        ),
+                                              ),
+                                        
+                                              SizedBox(width: 15),
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Vicks.jpg' , width: 120,),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Text('Flents, Eye Mask, Hot and Cold Water Therapy, 1 Mask' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      SizedBox(height: 18),
-                                                      Text('JOD 10.540' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text('Vicks Vaporub Colds Relief 25ml' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                    SizedBox(height: 35.5),
+                                                    Text('JOD 10.49' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                                      
-                                              ],
-                                            ),
-                                          ),
-                                        )
-
-                                      ],
-                                      onExpansionChanged: (bool expanded) {
-                                        setState(() {
-                                          _customTileExpanded2 = expanded;
-                                        });
-                                      },
-                                    ),
-
-                                  ),
-
-                                  ListTile(
-                                    title: ExpansionTile(
-                                      title: Text('Eye Accessories'),
-                                      trailing: Icon(
-                                        _customTileExpanded3
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                      ),
-                                      children: [
-
-                                        ListTile(
-                                          title: Container(
-                                            height: 250,
-                                            child: ListView(
-                                              scrollDirection: Axis.horizontal,
-                                              children: [
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Gel Beads.jpeg' , height: 120),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 8),
-                                                      Container(
-                                                        width: 100,
-                                                        child: Text('Spa Solutions – Gel Beads Eye Mask Hot & Cold' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
-                                                      Text('JOD 3.75' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
-                                                ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/ComplEye.jpeg' , height: 120),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 8),
-                                                      Text('ComplEye' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      SizedBox(height: 36,),
-                                                      Text('JOD 5.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
-                                                ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Magic Touch.jpg' , width: 120,),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 8),
-                                                      Text('Magic Touch eye drop applicator' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      SizedBox(height: 18),
-                                                      Text('JOD 14.94' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
-                                                ),
-                                                      
-                                              ],
-                                            ),
+                                              ),
+                                                    
+                                            ],
                                           ),
                                         ),
-
-                                      ],
-                                      onExpansionChanged: (bool expanded) {
-                                        setState(() {
-                                          _customTileExpanded3 = expanded;
-                                        });
-                                      },
+                                      ),
                                     ),
-                                  ), 
-                                ],
-                              ),
+                                  );
+                                }
+                              )
+                        
                             ],
                             onExpansionChanged: (bool expanded) {
                               setState(() {
-                                _customTileExpanded1 = expanded;
+                                _customTileExpanded4 = expanded;
                               });
                             },
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    width: 320,
-                    margin: EdgeInsets.only(left: 6),
-                    child: ExpansionTile(
-                      title: Text('Cough & Cold Remedies' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                      trailing: Icon(
-                        _customTileExpanded4
-                        ? Icons.keyboard_arrow_down
-                        : Icons.keyboard_arrow_right
-                      ),
-                      children: [
-
-                        ListTile(
-                          title: Container(
-                            height: 250,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Otrivin.webp' , height: 120),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        width: 100,
-                                        child: Text('Otrivin Oxy Fast Relief Adult Nasal Spray 10ml' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
-                                      Text('JOD 3.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                          
-                                SizedBox(width: 15),
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Strepsils.webp' , height: 120),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text('Strepsils Honey & Lemon Lozenge' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                      SizedBox(height: 36,),
-                                      Text('JOD 4.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                          
-                                SizedBox(width: 15),
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Vicks.jpg' , width: 120,),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text('Vicks Vaporub Colds Relief 25ml' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                      SizedBox(height: 35.5),
-                                      Text('JOD 10.49' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                                      
-                              ],
-                            ),
-                          ),
-                        )
-
-                      ],
-                      onExpansionChanged: (bool expanded) {
-                        setState(() {
-                          _customTileExpanded4 = expanded;
-                        });
-                      },
-                    ),
+                      );
+                    }
                   ),
 
                   SizedBox(height: 20),
@@ -896,212 +965,249 @@ class _page9State extends State<page9> {
                     child: Text('Baby & Mom Care' , style: TextStyle(fontSize: 22 , fontWeight: FontWeight.bold),),
                   ),
 
-                  Container(
-                    margin: EdgeInsets.only(left: 40),
-                    child: Row(
-                      children: [
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double localWidth = constraints.maxWidth;
 
-                        Container(
-                          width: 320,
+                      return Center(
+                        child: Container(
+                          width: localWidth / 1.1,
+                          child: Row(
+                            children: [
+                        
+                              Container(
+                                width: 325,
+                                child: ExpansionTile(
+                                  title: Text('Bath & Body' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                  trailing: Icon(
+                                    _customTileExpanded5
+                                    ? Icons.keyboard_arrow_down
+                                    : Icons.keyboard_arrow_right,
+                                  ),
+                                  children: [
+                                    Column(
+                                      children: [
+                        
+                                        ListTile(
+                                          title: ExpansionTile(
+                                            title: Text('Bar Soap'),
+                                            trailing: Icon(
+                                              _customTileExpanded6
+                                              ? Icons.keyboard_arrow_down
+                                              : Icons.keyboard_arrow_right,
+                                            ),
+                                            children: [
+                                              LayoutBuilder(
+                                                builder: (context, constraints) {
+                                                  double localWidth = constraints.maxWidth;
+
+                                                  return Center(
+                                                    child: Container(
+                                                      width: localWidth / 1.2,
+                                                      child: ListTile(
+                                                        title: Container(
+                                                          height: 250,
+                                                          child: ListView(
+                                                            scrollDirection: Axis.horizontal,
+                                                            children: [
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Dove.webp' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Container(
+                                                                      width: 100,
+                                                                      child: Text('Dove Beauty Bar Soap Pink 135g (Bundle Of 2) 135g X 2' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
+                                                                    Text('JOD 5.78' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Dove1.webp' , height: 120),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('Dove Beauty Bar Soap White 100g (Bundle Of 3) (Imported) 100g X 3' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    Text('JOD 5.78' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                        
+                                                              SizedBox(width: 15),
+                                                                    
+                                                              Container(
+                                                                width: 133,
+                                                                child: Column(
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(12),
+                                                                      child: Container(
+                                                                        child: Image.asset('assets/Images/Lifebuoy.webp' , width: 120,),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(height: 8),
+                                                                    Text('Lifebuoy Skin Cleansing Soap Bar Care 100g (Bundle Of 4) 100g*4' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                                    Text('JOD 6.540' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                                    
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                              )
+                                            ],
+                                            onExpansionChanged: (bool expanded) {
+                                              setState(() {
+                                                _customTileExpanded6 = expanded;
+                                              });
+                                            },
+                                          ),
+                                        ), 
+                                        
+                                      ],
+                                    ),
+                                  ],
+                                  onExpansionChanged: (bool expanded) {
+                                    setState(() {
+                                      _customTileExpanded5 = expanded;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                  ),
+
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      double localWidth = constraints.maxWidth;
+
+                      return Center(
+                        child: Container(
+                          width: localWidth / 1.1,
                           child: ExpansionTile(
-                            title: Text('Bath & Body' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                            title: Text('Pacifiers & Accessories' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
                             trailing: Icon(
-                              _customTileExpanded5
+                              _customTileExpanded7
                               ? Icons.keyboard_arrow_down
-                              : Icons.keyboard_arrow_right,
+                              : Icons.keyboard_arrow_right
                             ),
                             children: [
-                              Column(
-                                children: [
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  double localWidth = constraints.maxWidth;
 
-                                  ListTile(
-                                    title: ExpansionTile(
-                                      title: Text('Bar Soap'),
-                                      trailing: Icon(
-                                        _customTileExpanded6
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                      ),
-                                      children: [
-                                        ListTile(
-                                          title: Container(
-                                            height: 250,
-                                            child: ListView(
-                                              scrollDirection: Axis.horizontal,
-                                              children: [
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Dove.webp' , height: 120),
-                                                        ),
+                                  return Center(
+                                    child: Container(
+                                      width: localWidth / 1.3,
+                                      child: ListTile(
+                                        title: Container(
+                                          height: 250,
+                                          child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            children: [
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Pacifier.webp' , height: 120),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Container(
-                                                        width: 100,
-                                                        child: Text('Dove Beauty Bar Soap Pink 135g (Bundle Of 2) 135g X 2' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
-                                                      Text('JOD 5.78' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Container(
+                                                      width: 100,
+                                                      child: Text('Apple Bear Silicone Pacifier(Baby) Petals Type(AB-604)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
+                                                    Text('JOD 3.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Dove1.webp' , height: 120),
-                                                        ),
+                                              ),
+                                        
+                                              SizedBox(width: 15),
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Feeding Device.webp' , height: 120),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Text('Dove Beauty Bar Soap White 100g (Bundle Of 3) (Imported) 100g X 3' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      Text('JOD 5.78' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text('Apple Bear Dropper Feeding Device(Baby) Model-(AB-628)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                    SizedBox(height: 36,),
+                                                    Text('JOD 2.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                          
-                                                SizedBox(width: 15),
-                                                      
-                                                Container(
-                                                  width: 133,
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius: BorderRadius.circular(12),
-                                                        child: Container(
-                                                          child: Image.asset('assets/Images/Lifebuoy.webp' , width: 120,),
-                                                        ),
+                                              ),
+                                        
+                                              SizedBox(width: 15),
+                                                    
+                                              Container(
+                                                width: 133,
+                                                child: Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(12),
+                                                      child: Container(
+                                                        child: Image.asset('assets/Images/Bear.webp' , width: 120,),
                                                       ),
-                                                      SizedBox(height: 8),
-                                                      Text('Lifebuoy Skin Cleansing Soap Bar Care 100g (Bundle Of 4) 100g*4' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                                      Text('JOD 6.540' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    SizedBox(height: 8),
+                                                    Text('Apple Bear Fruit And Vegetable Nutrition Le Model-(AB-608)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
+                                                    SizedBox(height: 35.5),
+                                                    Text('JOD 1.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
+                                                  ],
                                                 ),
-                                                      
-                                              ],
-                                            ),
+                                              ),
+                                                    
+                                            ],
                                           ),
-                                        )
-                                      ],
-                                      onExpansionChanged: (bool expanded) {
-                                        setState(() {
-                                          _customTileExpanded6 = expanded;
-                                        });
-                                      },
+                                        ),
+                                      ),
                                     ),
-                                  ), 
-                                  
-                                ],
-                              ),
+                                  );
+                                }
+                              )
                             ],
                             onExpansionChanged: (bool expanded) {
                               setState(() {
-                                _customTileExpanded5 = expanded;
+                                _customTileExpanded7 = expanded;
                               });
                             },
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-
-                  Container(
-                    width: 320,
-                    margin: EdgeInsets.only(left: 6),
-                    child: ExpansionTile(
-                      title: Text('Pacifiers & Accessories' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                      trailing: Icon(
-                        _customTileExpanded7
-                        ? Icons.keyboard_arrow_down
-                        : Icons.keyboard_arrow_right
-                      ),
-                      children: [
-                        ListTile(
-                          title: Container(
-                            height: 250,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Pacifier.webp' , height: 120),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Container(
-                                        width: 100,
-                                        child: Text('Apple Bear Silicone Pacifier(Baby) Petals Type(AB-604)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,)),
-                                      Text('JOD 3.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                          
-                                SizedBox(width: 15),
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Feeding Device.webp' , height: 120),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text('Apple Bear Dropper Feeding Device(Baby) Model-(AB-628)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                      SizedBox(height: 36,),
-                                      Text('JOD 2.00' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                          
-                                SizedBox(width: 15),
-                                      
-                                Container(
-                                  width: 133,
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: Container(
-                                          child: Image.asset('assets/Images/Bear.webp' , width: 120,),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text('Apple Bear Fruit And Vegetable Nutrition Le Model-(AB-608)' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 12) , textAlign: TextAlign.center,),
-                                      SizedBox(height: 35.5),
-                                      Text('JOD 1.50' , style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18)),
-                                    ],
-                                  ),
-                                ),
-                                      
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                      onExpansionChanged: (bool expanded) {
-                        setState(() {
-                          _customTileExpanded7 = expanded;
-                        });
-                      },
-                    ),
+                      );
+                    }
                   ),
           
                 ],
