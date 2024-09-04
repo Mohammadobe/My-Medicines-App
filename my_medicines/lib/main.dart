@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -32,11 +31,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    DevicePreview(builder: (context) {
-      return Medicine();
-    },)
-  );
+  runApp(Medicine());
 }
 
 class Medicine extends StatelessWidget {
@@ -44,7 +39,6 @@ class Medicine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      builder: DevicePreview.appBuilder,
       routes: {
         '/Project (Info page)': (context) => page2(),
         '/Project (Registration page)': (context) => page3(),
